@@ -5,7 +5,7 @@ const gameboard = (() => {
 
 const gameFlow = (() => {
 
-})
+})();
 
 const Players = (name) => {
     const sayName = () => console.log(name);
