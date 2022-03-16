@@ -1,12 +1,11 @@
 const gameboard = (() => {
-    const board = () => [];
+    const board = () => ['X','O','O','X'];
     return board;
 })();
 
-const gameFlow =(() => {
+const gameFlow = (() => {
 
 })
-
 
 const Players = (name) => {
     const sayName = () => console.log(name);
