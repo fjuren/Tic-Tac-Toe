@@ -1,6 +1,6 @@
 const gameboard = (() => {
-    const board = () => ['X','O','O','X'];
-    return board;
+    const board = () => ['X','O','O','X','X','X','X','X'];
+    return {board};
 })();
 
 const gameFlow = (() => {
@@ -22,4 +22,10 @@ const Player_2 = (name) => {
     return {sayName};
 }
 
-const jeff = Player_1('jeff')
+// const jeff = Player_1('jeff')
+
+const renderMove = (() => {
+    gameboard.board().forEach((move,i,a) => {
+        document.getElementById("" + i + "").innerHTML = move;
+    });
+});
