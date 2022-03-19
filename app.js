@@ -1,12 +1,19 @@
 const gameboard = (() => {
     const playerMoves = () => ['X','O','O','X','X','X','X','X'];
+    const preventDuplicateMoves = []
     const boardClick = document.addEventListener('click', (e) => {
-        if (e.target.id === "") {
+        if (preventDuplicateMoves.includes("" + e.target.id + "") == true) {
             // do nothing
-        } else
-        console.log(e.target.id);
+        } if (e.target.id === "") {
+            // do nothing
+        } if (e.target.id === "" || preventDuplicateMoves.includes("" + e.target.id + "") == true) {
+            // do nothing
+        } if (e.target.id != "" && (preventDuplicateMoves.includes("" + e.target.id + "") == false)){
+            console.log(e.target.id);
+            preventDuplicateMoves.push(""+ e.target.id + "");
+            console.log(preventDuplicateMoves);
+        }
     });
-
     return {playerMoves};
 })();
 
