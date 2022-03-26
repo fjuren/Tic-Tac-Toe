@@ -14,7 +14,7 @@
     <br>
     <br>
     <div class="grid-container">
-        <div id="0" class="grid-item">X</div>
+        <div id="0" class="grid-item"></div>
         <div id="1" class="grid-item"></div>
         <div id="2" class="grid-item"></div>
         <div id="3" class="grid-item"></div>
@@ -23,6 +23,23 @@
         <div id="6" class="grid-item"></div>
         <div id="7" class="grid-item"></div>
         <div id="8" class="grid-item"></div>
+    </div>
+    <div>
+        <form action="/" method="post"></form>
+        <div>
+            <label for="player1">Player 1 name: </label>
+            <input type="text" id="player1">
+        </div>
+        <div>
+            <label for="player2">Player 2 name: </label>
+            <input type="text" id="player2">
+        </div>
+        <div>
+            <button type="submit">Play!</button>
+        </div>
+    </div>
+    <div>
+        <h3>Your move, player {}</h3>
     </div>
     <script src="app.js"></script>
 </body>
