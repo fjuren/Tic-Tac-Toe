@@ -1,5 +1,9 @@
+// X and O assigment
 const X = "X"
 const O = "O"
+
+// Players added once entered by users
+playerAssignments = []
 
 const form = document.getElementById("playerNames")
 // retrieve submitted names entered by users
@@ -8,29 +12,35 @@ form.addEventListener("submit",  (e) => {
 
     const player1Name = Player_1(document.getElementById("player1").value, X);
     const player2Name = Player_2(document.getElementById('player2').value, O);
-    player1Name.sayName();
-    player1Name.symbol();
-    player2Name.sayName();
-    player2Name.symbol();
+    // player1Name.sayName();
+    // player1Name.symbol();
+    // player2Name.sayName();
+    // player2Name.symbol();
+
+    playerAssignments.push(player1Name,player2Name)
+
     form.reset();
 });
 
+// Factory function
 const Players = (name) => {
-    const sayName = () => console.log(name);
+    const sayName = () => name;
     return {sayName};
 }
 
+// inherits from Players
 const Player_1 = (name, sign) => {
     const {sayName} = Players(name);
     const _sign = sign;
-    const symbol = () => console.log(_sign);
+    const symbol = () => _sign;
     return {sayName, symbol};
 }
 
+// inherits from Players
 const Player_2 = (name, sign) => {
     const {sayName} = Players(name);
     const _sign = sign;
-    const symbol = () => console.log(_sign);
+    const symbol = () => _sign;
     return {sayName, symbol};
 }
 
@@ -50,7 +60,8 @@ const gameboard = (() => {
             preventDuplicateMoves.push(""+ e.target.id + "");
         };
         // next step is to push the "X" to player moves, after checking whether the position was moved already
-        e.target.innerHTML = player1Name.symbol();
+        e.target.innerHTML = "" + playerAssignments[0].symbol() + "";
+        // console.log(playerAssignments[1].symbol())
     }); 
     return {playerMoves};  
 })();
