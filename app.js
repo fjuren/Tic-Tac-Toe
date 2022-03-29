@@ -86,8 +86,12 @@ var turnTracker = 0
 const gameFlow = (() => {
     const playerTurn = () => {
         if (turnTracker === 0) {
+            // Tell player 1 it's their turn
+            document.getElementById("playerMoveReadout").innerHTML = "Player 1's turn"
             turnTracker++;
         } else {
+            // Tell player 2 it's their turn
+            document.getElementById("playerMoveReadout").innerHTML = "Player 2's turn"
             turnTracker--;
         }
     }
@@ -100,19 +104,16 @@ const gameFlow = (() => {
             if (document.getElementById("" + checkWinConditions[o][0] + "").innerHTML === X && 
                 document.getElementById("" + checkWinConditions[o][1] + "").innerHTML === X &&
                 document.getElementById("" + checkWinConditions[o][2] + "").innerHTML === X) {
-                    console.log("player 1 wins");
+                    document.getElementById("playerMoveReadout").innerHTML = "Player 1 wins!!"
+
             }
             // checks player 2 moves against win conditions
             if (document.getElementById("" + checkWinConditions[o][0] + "").innerHTML === O && 
                 document.getElementById("" + checkWinConditions[o][1] + "").innerHTML === O &&
                 document.getElementById("" + checkWinConditions[o][2] + "").innerHTML === O) {
-                    console.log("player 2 wins");
+                    document.getElementById("playerMoveReadout").innerHTML = "Player 2 wins!!"
             } 
-            else {
-                // continue game
-            }
         }
-        // console.log("checkWin running")
     }
     return {playerTurn, checkWin}
 })();
