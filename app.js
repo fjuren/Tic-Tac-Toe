@@ -2,18 +2,6 @@
 const X = "X"
 const O = "O"
 
-// const setWinConditions =
-//     [
-//         [0,1,2],
-//         [3,4,5]
-//         // (6,7,8),
-//         // (0,3,6),
-//         // (1,4,7),
-//         // (2,5,8),
-//         // (0,4,8),
-//         // (2,4,6) 
-//     ]
-
 // Players names & sign are added once names are entered by users
 playerAssignments = []
 
@@ -53,11 +41,12 @@ const Player_2 = (name, sign) => {
 
 // tracks the player moves on the tic tac toe board
 const gameboard = (() => {
-    // Any 1 of the patters wins the game
+    // Any 1 of the 7 patters wins the game
     const setWinConditions = () => {
+        // 7 win conditions
         const conditions = [
             [0,1,2],
-            [3,4,5]
+            [3,4,5],
             [6,7,8],
             [0,3,6],
             [1,4,7],
@@ -83,7 +72,9 @@ const gameboard = (() => {
         };
         // next step is to push the "X" to player moves, after checking whether the position was moved already
         e.target.innerHTML = "" + playerAssignments[turnTracker].setSign() + "";
+        // run gameFLow after each player move
         gameFlow.playerTurn();
+        gameFlow.checkWin();
     }); 
     return {setWinConditions}
 })();
@@ -100,7 +91,29 @@ const gameFlow = (() => {
             turnTracker--;
         }
     }
-    const checkWin = null
+    // checks win conditions and whether there's a match. If yes, the player wins. Otherwise continue the game
+    const checkWin = () => {
+        const checkWinConditions = gameboard.setWinConditions().conditions
+        // loops through each win condition
+        for (let o = 0; o < checkWinConditions.length; o++) {
+            // checks player 1 moves against win conditions
+            if (document.getElementById("" + checkWinConditions[o][0] + "").innerHTML === X && 
+                document.getElementById("" + checkWinConditions[o][1] + "").innerHTML === X &&
+                document.getElementById("" + checkWinConditions[o][2] + "").innerHTML === X) {
+                    console.log("player 1 wins");
+            }
+            // checks player 2 moves against win conditions
+            if (document.getElementById("" + checkWinConditions[o][0] + "").innerHTML === O && 
+                document.getElementById("" + checkWinConditions[o][1] + "").innerHTML === O &&
+                document.getElementById("" + checkWinConditions[o][2] + "").innerHTML === O) {
+                    console.log("player 2 wins");
+            } 
+            else {
+                // continue game
+            }
+        }
+        // console.log("checkWin running")
+    }
     return {playerTurn, checkWin}
 })();
 
