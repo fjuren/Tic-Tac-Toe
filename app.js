@@ -87,11 +87,11 @@ const gameFlow = (() => {
     const playerTurn = () => {
         if (turnTracker === 0) {
             // Tell player 1 it's their turn
-            document.getElementById("playerMoveReadout").innerHTML = "Player 1's turn"
+            document.getElementById("playerMoveReadout").innerHTML = `${playerAssignments[1].setName()}'s turn`
             turnTracker++;
         } else {
             // Tell player 2 it's their turn
-            document.getElementById("playerMoveReadout").innerHTML = "Player 2's turn"
+            document.getElementById("playerMoveReadout").innerHTML = `${playerAssignments[0].setName()}'s turn`
             turnTracker--;
         }
     }
@@ -104,14 +104,14 @@ const gameFlow = (() => {
             if (document.getElementById("" + checkWinConditions[o][0] + "").innerHTML === X && 
                 document.getElementById("" + checkWinConditions[o][1] + "").innerHTML === X &&
                 document.getElementById("" + checkWinConditions[o][2] + "").innerHTML === X) {
-                    document.getElementById("playerMoveReadout").innerHTML = "Player 1 wins!!"
+                    document.getElementById("playerMoveReadout").innerHTML = `${playerAssignments[0].setName()} wins!!`
 
             }
             // checks player 2 moves against win conditions
             if (document.getElementById("" + checkWinConditions[o][0] + "").innerHTML === O && 
                 document.getElementById("" + checkWinConditions[o][1] + "").innerHTML === O &&
                 document.getElementById("" + checkWinConditions[o][2] + "").innerHTML === O) {
-                    document.getElementById("playerMoveReadout").innerHTML = "Player 2 wins!!"
+                    document.getElementById("playerMoveReadout").innerHTML = `${playerAssignments[1].setName()} wins!!`
             } 
         }
     }
