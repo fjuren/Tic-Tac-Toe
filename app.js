@@ -100,14 +100,20 @@ const gameFlow = (() => {
             const addDiv = document.createElement("div");
             const button = document.createElement("button");
             button.setAttribute("type", "submit");
-            button.classList.add("endOfGameButtons");
+            button.setAttribute("id", "endOfGameButton");
             button.textContent = "Restart Game";
             
             document.getElementById("playerMoveReadout").insertAdjacentElement("afterend", addDiv)
             addDiv.appendChild(button);
         }
         return {restartButton}
-    } 
+    }
+    const removeButtons = () => {
+        document.getElementById("endOfGameButton").onclick = (e) => {
+            e.target.parentNode.removeChild(e.target);
+            
+        }
+    }
     // checks win conditions and whether there's a match. If yes, the player wins. Otherwise continue the game
     const checkWin = () => {
         const checkWinConditions = gameboard.setWinConditions().conditions
@@ -115,27 +121,32 @@ const gameFlow = (() => {
         for (let o = 0; o < checkWinConditions.length; o++) {
             // checks player 1 moves against win conditions
             if (document.getElementById("" + checkWinConditions[o][0] + "").innerHTML === X && 
-            document.getElementById("" + checkWinConditions[o][1] + "").innerHTML === X &&
-            document.getElementById("" + checkWinConditions[o][2] + "").innerHTML === X) {
+                document.getElementById("" + checkWinConditions[o][1] + "").innerHTML === X &&
+                document.getElementById("" + checkWinConditions[o][2] + "").innerHTML === X) {
                 document.getElementById("playerMoveReadout").innerHTML = `${playerAssignments[0].setName()} wins!!`
                 // Add restart button when game is done
                 gameFlow.addButtons().restartButton();
+                gameFlow.removeButtons()
             }
             // checks player 2 moves against win conditions
             if (document.getElementById("" + checkWinConditions[o][0] + "").innerHTML === O && 
-            document.getElementById("" + checkWinConditions[o][1] + "").innerHTML === O &&
+                document.getElementById("" + checkWinConditions[o][1] + "").innerHTML === O &&
                 document.getElementById("" + checkWinConditions[o][2] + "").innerHTML === O) {
-                    document.getElementById("playerMoveReadout").innerHTML = `${playerAssignments[1].setName()} wins!!`
+                document.getElementById("playerMoveReadout").innerHTML = `${playerAssignments[1].setName()} wins!!`
+                                    // Add restart button when game is done
+                gameFlow.addButtons().restartButton();
+                gameFlow.removeButtons()
                 } 
             }
         }
-        return {playerTurn, addButtons, checkWin}
+        return {playerTurn, addButtons, checkWin, removeButtons}
     })();
+
+
     
-    // currently doesn't do anything useful
-    const renderMove = (() => {
-        gameboard.playerMoves().forEach((move,i,a) => {
-            document.getElementById("" + i + "").innerHTML = move;
-        });
+// currently doesn't do anything useful
+const renderMove = (() => {
+    gameboard.playerMoves().forEach((move,i,a) => {
+        document.getElementById("" + i + "").innerHTML = move;
     });
-    
+});
