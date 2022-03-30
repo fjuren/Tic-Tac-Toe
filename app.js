@@ -110,8 +110,12 @@ const gameFlow = (() => {
     }
     const removeButtons = () => {
         document.getElementById("endOfGameButton").onclick = (e) => {
+            // remove button on click
             e.target.parentNode.removeChild(e.target);
-            
+            // Clear board
+            for (let id = 0; id < 9; id++) {
+                document.getElementById(`${id}`).innerHTML = ""
+            }
         }
     }
     // checks win conditions and whether there's a match. If yes, the player wins. Otherwise continue the game
