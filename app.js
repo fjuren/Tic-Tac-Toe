@@ -81,21 +81,37 @@ const gameboard = (() => {
 
 // Player 1's turn if turnTracker = 0, else player 2's turn
 var turnTracker = 0
+var totalTurns = 0
 // gameFLow controls the flow of the game
 const gameFlow = (() => {
+    // Track which player move last and tells the user who's turn it is
     const playerTurn = () => {
         if (turnTracker === 0) {
             // Tell player 1 it's their turn
             document.getElementById("playerMoveReadout").innerHTML = `${playerAssignments[1].setName()}'s turn`
             turnTracker++;
+            gameFlow.checkTieGame();
         } else {
             // Tell player 2 it's their turn
             document.getElementById("playerMoveReadout").innerHTML = `${playerAssignments[0].setName()}'s turn`
             turnTracker--;
+            gameFlow.checkTieGame();
+        }
+        totalTurns++;
+        console.log(totalTurns);
+    }
+    // Checks whether the game tied
+    const checkTieGame = () => {
+        if ((totalTurns === 8) && ((document.getElementById("playerMoveReadout").innerHTML != `${playerAssignments[0].setName()} turn`) || (document.getElementById("playerMoveReadout").innerHTML != `${playerAssignments[1].setName()} turn`))) {
+            console.log("tie game, restart");
+            document.getElementById("playerMoveReadout").innerHTML = "Tie Game. Restart to play again!"
+            gameFlow.addButtons().restartButton();
+            totalTurns = 0;
+            gameFlow.removeButtons();
         }
     }
     // creates restart and play again buttons
-    const addButtons =() => {
+    const addButtons = () => {
         const restartButton = () => {
             const addDiv = document.createElement("div");
             const button = document.createElement("button");
@@ -128,6 +144,7 @@ const gameFlow = (() => {
                 document.getElementById("" + checkWinConditions[o][1] + "").innerHTML === X &&
                 document.getElementById("" + checkWinConditions[o][2] + "").innerHTML === X) {
                 document.getElementById("playerMoveReadout").innerHTML = `${playerAssignments[0].setName()} wins!!`
+                totalTurns = 0;
                 // Check if restart button is already present before adding it
                 if (document.getElementById("endOfGameButton") === null) {
                     // Add restart button when game is done
@@ -140,6 +157,7 @@ const gameFlow = (() => {
                 document.getElementById("" + checkWinConditions[o][1] + "").innerHTML === O &&
                 document.getElementById("" + checkWinConditions[o][2] + "").innerHTML === O) {
                 document.getElementById("playerMoveReadout").innerHTML = `${playerAssignments[1].setName()} wins!!`
+                totalTurns = 0;
                 // Check if restart button is already present before adding it
                 if (document.getElementById("endOfGameButton") === null) {
                     // Add restart button when game is done
@@ -147,13 +165,9 @@ const gameFlow = (() => {
                 }
                 gameFlow.removeButtons()
                 }
-            // prints tie game if 9 moves are done and no win conditions are met 
-            if (document.getElementById) {
-                document.getElementById("playerMoveReadout").innerHTML = `Tie game, restart to play again!`
-            }
             }
         }
-        return {playerTurn, addButtons, checkWin, removeButtons}
+        return {playerTurn, addButtons, checkWin, removeButtons, checkTieGame}
     })();
 
 
