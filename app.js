@@ -128,19 +128,29 @@ const gameFlow = (() => {
                 document.getElementById("" + checkWinConditions[o][1] + "").innerHTML === X &&
                 document.getElementById("" + checkWinConditions[o][2] + "").innerHTML === X) {
                 document.getElementById("playerMoveReadout").innerHTML = `${playerAssignments[0].setName()} wins!!`
-                // Add restart button when game is done
-                gameFlow.addButtons().restartButton();
+                // Check if restart button is already present before adding it
+                if (document.getElementById("endOfGameButton") === null) {
+                    // Add restart button when game is done
+                    gameFlow.addButtons().restartButton();
+                }
                 gameFlow.removeButtons()
-            }
+                }
             // checks player 2 moves against win conditions
             if (document.getElementById("" + checkWinConditions[o][0] + "").innerHTML === O && 
                 document.getElementById("" + checkWinConditions[o][1] + "").innerHTML === O &&
                 document.getElementById("" + checkWinConditions[o][2] + "").innerHTML === O) {
                 document.getElementById("playerMoveReadout").innerHTML = `${playerAssignments[1].setName()} wins!!`
-                                    // Add restart button when game is done
-                gameFlow.addButtons().restartButton();
+                // Check if restart button is already present before adding it
+                if (document.getElementById("endOfGameButton") === null) {
+                    // Add restart button when game is done
+                    gameFlow.addButtons().restartButton();
+                }
                 gameFlow.removeButtons()
-                } 
+                }
+            // prints tie game if 9 moves are done and no win conditions are met 
+            if (document.getElementById) {
+                document.getElementById("playerMoveReadout").innerHTML = `Tie game, restart to play again!`
+            }
             }
         }
         return {playerTurn, addButtons, checkWin, removeButtons}
