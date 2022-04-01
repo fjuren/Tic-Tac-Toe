@@ -86,12 +86,6 @@ var totalTurns = 0
 const gameFlow = (() => {
     // Track which player move last and tells the user who's turn it is
     const playerTurn = () => {
-        // // console.log(turnTracker);
-        // console.log(totalTurns)
-        // const playerHandle = document.getElementById("playerMoveReadout").innerHTML
-        // if (turnTracker === 0 && playerHandle === "Tie Game. Restart to play again!") {
-        //     console.log("player 1")
-        // }
         if (turnTracker === 0) {
             // Tell player 1 it's their turn
             document.getElementById("playerMoveReadout").innerHTML = `${playerAssignments[1].setName()}'s turn`
@@ -104,7 +98,6 @@ const gameFlow = (() => {
             gameFlow.checkTieGame();
         }
         totalTurns++;
-        console.log(totalTurns)
     }
     // Checks whether the game tied
     const checkTieGame = () => {
@@ -148,7 +141,7 @@ const gameFlow = (() => {
             if (document.getElementById("" + checkWinConditions[o][0] + "").innerHTML === X && 
                 document.getElementById("" + checkWinConditions[o][1] + "").innerHTML === X &&
                 document.getElementById("" + checkWinConditions[o][2] + "").innerHTML === X) {
-                document.getElementById("playerMoveReadout").innerHTML = `${playerAssignments[0].setName()} wins!!`
+                document.getElementById("playerMoveReadout").innerHTML = `${playerAssignments[0].setName()} wins!! ${playerAssignments[1].setName()} turn`
                 totalTurns = 0;
                 // Check if restart button is already present before adding it
                 if (document.getElementById("endOfGameButton") === null) {
@@ -161,7 +154,7 @@ const gameFlow = (() => {
             if (document.getElementById("" + checkWinConditions[o][0] + "").innerHTML === O && 
                 document.getElementById("" + checkWinConditions[o][1] + "").innerHTML === O &&
                 document.getElementById("" + checkWinConditions[o][2] + "").innerHTML === O) {
-                document.getElementById("playerMoveReadout").innerHTML = `${playerAssignments[1].setName()} wins!!`
+                document.getElementById("playerMoveReadout").innerHTML = `${playerAssignments[1].setName()} wins!! ${playerAssignments[0].setName()} turn`
                 totalTurns = 0;
                 // Check if restart button is already present before adding it
                 if (document.getElementById("endOfGameButton") === null) {
