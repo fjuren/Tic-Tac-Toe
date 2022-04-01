@@ -86,6 +86,12 @@ var totalTurns = 0
 const gameFlow = (() => {
     // Track which player move last and tells the user who's turn it is
     const playerTurn = () => {
+        // // console.log(turnTracker);
+        // console.log(totalTurns)
+        // const playerHandle = document.getElementById("playerMoveReadout").innerHTML
+        // if (turnTracker === 0 && playerHandle === "Tie Game. Restart to play again!") {
+        //     console.log("player 1")
+        // }
         if (turnTracker === 0) {
             // Tell player 1 it's their turn
             document.getElementById("playerMoveReadout").innerHTML = `${playerAssignments[1].setName()}'s turn`
@@ -98,15 +104,13 @@ const gameFlow = (() => {
             gameFlow.checkTieGame();
         }
         totalTurns++;
-        console.log(totalTurns);
+        console.log(totalTurns)
     }
     // Checks whether the game tied
     const checkTieGame = () => {
         if ((totalTurns === 8) && ((document.getElementById("playerMoveReadout").innerHTML != `${playerAssignments[0].setName()} turn`) || (document.getElementById("playerMoveReadout").innerHTML != `${playerAssignments[1].setName()} turn`))) {
-            console.log("tie game, restart");
             document.getElementById("playerMoveReadout").innerHTML = "Tie Game. Restart to play again!"
             gameFlow.addButtons().restartButton();
-            totalTurns = 0;
             gameFlow.removeButtons();
         }
     }
@@ -128,6 +132,7 @@ const gameFlow = (() => {
         document.getElementById("endOfGameButton").onclick = (e) => {
             // remove button on click
             e.target.parentNode.removeChild(e.target);
+            totalTurns = 0;
             // Clear board
             for (let id = 0; id < 9; id++) {
                 document.getElementById(`${id}`).innerHTML = ""
@@ -169,12 +174,3 @@ const gameFlow = (() => {
         }
         return {playerTurn, addButtons, checkWin, removeButtons, checkTieGame}
     })();
-
-
-    
-// currently doesn't do anything useful
-const renderMove = (() => {
-    gameboard.playerMoves().forEach((move,i,a) => {
-        document.getElementById("" + i + "").innerHTML = move;
-    });
-});
