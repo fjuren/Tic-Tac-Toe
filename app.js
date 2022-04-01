@@ -101,7 +101,7 @@ const gameFlow = (() => {
     }
     // Checks whether the game tied
     const checkTieGame = () => {
-        if ((totalTurns === 8) && ((document.getElementById("playerMoveReadout").innerHTML != `${playerAssignments[0].setName()} turn`) || (document.getElementById("playerMoveReadout").innerHTML != `${playerAssignments[1].setName()} turn`))) {
+        if ((totalTurns === 8) && ((document.getElementById("playerMoveReadout").innerHTML != `${playerAssignments[0].setName()}'s turn`) || (document.getElementById("playerMoveReadout").innerHTML != `${playerAssignments[1].setName()}'s turn`))) {
             document.getElementById("playerMoveReadout").innerHTML = "Tie Game. Restart to play again!"
             gameFlow.addButtons().restartButton();
             gameFlow.removeButtons();
@@ -130,6 +130,17 @@ const gameFlow = (() => {
             for (let id = 0; id < 9; id++) {
                 document.getElementById(`${id}`).innerHTML = ""
             }
+            gameFlow.playerTurnOnRestart();
+        }
+    }
+    // Tells user who's turn it is when/if the game restarts
+    const playerTurnOnRestart = () => {
+        if (turnTracker === 0) {
+            document.getElementById("playerMoveReadout").innerHTML = `${playerAssignments[0].setName()}'s turn`
+            
+        } else {
+            document.getElementById("playerMoveReadout").innerHTML = `${playerAssignments[1].setName()}'s turn`
+            
         }
     }
     // checks win conditions and whether there's a match. If yes, the player wins. Otherwise continue the game
@@ -165,5 +176,5 @@ const gameFlow = (() => {
                 }
             }
         }
-        return {playerTurn, addButtons, checkWin, removeButtons, checkTieGame}
+        return {playerTurn, addButtons, checkWin, removeButtons, checkTieGame, playerTurnOnRestart}
     })();
