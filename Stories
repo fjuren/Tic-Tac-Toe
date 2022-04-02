@@ -1,9 +1,10 @@
 TODO
 [X] Add restart button if tie game
-[ ] Print player turn when game restarts
+[X] Print player turn when game restarts
 [ ] UI update
 
 FIXME
-[ ] Prevent multiple player moves at same gameboard position
+[X] Prevent multiple player moves at same gameboard position
 [X] Prevent duplicate "restart game" buttons
 [X] Fix tic tac toe board sizing issue
+[ ] Fix to story "Prevent multiple player moves at same gameboard position"

@@ -60,21 +60,32 @@ const gameboard = (() => {
         // Otherwise plays the players move
     const preventDuplicateMoves = []
     const boardID = document.querySelector(".grid-container");
+    // move validations
     const boardClick = boardID.addEventListener('click', (e) => {        
+        // preventDuplicateMoves.push(e.target.id)
         if (preventDuplicateMoves.includes("" + e.target.id + "") == true) {
             // do nothing
-        } if (e.target.id === "") {
-            // do nothing
-        } if (e.target.id === "" || preventDuplicateMoves.includes("" + e.target.id + "") == true) {
-            // do nothing
-        } if (e.target.id != "" && (preventDuplicateMoves.includes("" + e.target.id + "") == false)){
+            console.log('included')
+            // && (e.target.innerHTML != '' || e.target.innerHTML != X || e.target.innerHTML != O)
+        } 
+        // if (e.target.id === "") {
+        //     // do nothing
+        // } 
+        // if (e.target.id === "" || preventDuplicateMoves.includes("" + e.target.id + "") == true) {
+        //     // do nothing
+        // } 
+        if (e.target.id != "" && (preventDuplicateMoves.includes("" + e.target.id + "") == false)){
             preventDuplicateMoves.push(""+ e.target.id + "");
-        };
+            e.target.innerHTML = "" + playerAssignments[turnTracker].setSign() + "";
+            // run gameFLow after each player move
+            gameFlow.playerTurn();
+            gameFlow.checkWin();
+        } else {
+            console.log("else");
+        }
         // next step is to push the "X" to player moves, after checking whether the position was moved already
-        e.target.innerHTML = "" + playerAssignments[turnTracker].setSign() + "";
-        // run gameFLow after each player move
-        gameFlow.playerTurn();
-        gameFlow.checkWin();
+        
+        console.log(preventDuplicateMoves);
     }); 
     return {setWinConditions}
 })();
@@ -152,7 +163,7 @@ const gameFlow = (() => {
             if (document.getElementById("" + checkWinConditions[o][0] + "").innerHTML === X && 
                 document.getElementById("" + checkWinConditions[o][1] + "").innerHTML === X &&
                 document.getElementById("" + checkWinConditions[o][2] + "").innerHTML === X) {
-                document.getElementById("playerMoveReadout").innerHTML = `${playerAssignments[0].setName()} wins!! ${playerAssignments[1].setName()} turn`
+                document.getElementById("playerMoveReadout").innerHTML = `${playerAssignments[0].setName()} wins!!`
                 totalTurns = 0;
                 // Check if restart button is already present before adding it
                 if (document.getElementById("endOfGameButton") === null) {
@@ -165,7 +176,7 @@ const gameFlow = (() => {
             if (document.getElementById("" + checkWinConditions[o][0] + "").innerHTML === O && 
                 document.getElementById("" + checkWinConditions[o][1] + "").innerHTML === O &&
                 document.getElementById("" + checkWinConditions[o][2] + "").innerHTML === O) {
-                document.getElementById("playerMoveReadout").innerHTML = `${playerAssignments[1].setName()} wins!! ${playerAssignments[0].setName()} turn`
+                document.getElementById("playerMoveReadout").innerHTML = `${playerAssignments[1].setName()} wins!!`
                 totalTurns = 0;
                 // Check if restart button is already present before adding it
                 if (document.getElementById("endOfGameButton") === null) {
