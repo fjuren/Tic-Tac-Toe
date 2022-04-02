@@ -39,6 +39,9 @@ const Player_2 = (name, sign) => {
     return {setName, setSign};
 }
 
+// Prevents duplicate moves. Nothing happens if a position has already been moved. Used in gameboard -> boardClick & gameFlow -> removeButton
+const preventDuplicateMoves = []
+
 // tracks the player moves on the tic tac toe board
 const gameboard = (() => {
     // Any 1 of the 7 patters wins the game
@@ -56,36 +59,29 @@ const gameboard = (() => {
         ]
         return {conditions}
     }
-        // Prevents duplicate moves. Nothing happens if a position has already been moved.
-        // Otherwise plays the players move
-    const preventDuplicateMoves = []
+
     const boardID = document.querySelector(".grid-container");
     // move validations
     const boardClick = boardID.addEventListener('click', (e) => {        
-        // preventDuplicateMoves.push(e.target.id)
         if (preventDuplicateMoves.includes("" + e.target.id + "") == true) {
-            // do nothing
-            console.log('included')
-            // && (e.target.innerHTML != '' || e.target.innerHTML != X || e.target.innerHTML != O)
+        // do nothing
         } 
-        // if (e.target.id === "") {
-        //     // do nothing
-        // } 
-        // if (e.target.id === "" || preventDuplicateMoves.includes("" + e.target.id + "") == true) {
-        //     // do nothing
-        // } 
+        // add move to board
         if (e.target.id != "" && (preventDuplicateMoves.includes("" + e.target.id + "") == false)){
             preventDuplicateMoves.push(""+ e.target.id + "");
             e.target.innerHTML = "" + playerAssignments[turnTracker].setSign() + "";
             // run gameFLow after each player move
             gameFlow.playerTurn();
             gameFlow.checkWin();
-        } else {
-            console.log("else");
+        } 
+        // if (totalTurns === 9) {
+        //     preventDuplicateMoves = []
+        // }
+        else {
+            // do nothing
         }
-        // next step is to push the "X" to player moves, after checking whether the position was moved already
-        
-        console.log(preventDuplicateMoves);
+
+        console.log(preventDuplicateMoves)
     }); 
     return {setWinConditions}
 })();
@@ -142,6 +138,7 @@ const gameFlow = (() => {
                 document.getElementById(`${id}`).innerHTML = ""
             }
             gameFlow.playerTurnOnRestart();
+            preventDuplicateMoves.length = 0;
         }
     }
     // Tells user who's turn it is when/if the game restarts
