@@ -7,4 +7,4 @@ FIXME
 [X] Prevent multiple player moves at same gameboard position
 [X] Prevent duplicate "restart game" buttons
 [X] Fix tic tac toe board sizing issue
-[ ] Fix to story "Prevent multiple player moves at same gameboard position"
+[X] Fix to story "Prevent multiple player moves at same gameboard position"

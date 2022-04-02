@@ -74,14 +74,9 @@ const gameboard = (() => {
             gameFlow.playerTurn();
             gameFlow.checkWin();
         } 
-        // if (totalTurns === 9) {
-        //     preventDuplicateMoves = []
-        // }
         else {
             // do nothing
         }
-
-        console.log(preventDuplicateMoves)
     }); 
     return {setWinConditions}
 })();
